@@ -35,6 +35,25 @@ namespace xadrez
                 capturadas.Add(pecaCapturada);
             tab.colocarPeca(p, destino);
 
+            // #jogadaespecial roque pequeno
+            if (p is Rei && destino.coluna == origem.coluna + 2)
+            {
+                Posicao origemTorre = new Posicao(origem.linha, origem.coluna + 3);
+                Posicao destinoTorre = new Posicao(origem.linha, origem.coluna + 1);
+                Peca T = tab.retirarPeca(origemTorre);
+                T.incrementarQtdMovimentos();
+                tab.colocarPeca(T, destinoTorre);
+            }
+
+            // #jogadaespecial roque grande
+            if (p is Rei && destino.coluna == origem.coluna - 2)
+            {
+                Posicao origemTorre = new Posicao(origem.linha, origem.coluna - 4);
+                Posicao destinoTorre = new Posicao(origem.linha, origem.coluna - 1);
+                Peca T = tab.retirarPeca(origemTorre);
+                T.incrementarQtdMovimentos();
+                tab.colocarPeca(T, destinoTorre);
+            }
             return pecaCapturada;
         }
         public void desfazMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
@@ -48,25 +67,25 @@ namespace xadrez
             }
             tab.colocarPeca(p, origem);
 
-            // #jogadaespecial roque pequeno
-            //if (p is Rei && destino.coluna == origem.coluna + 2)
-            //{
-            //    Posicao origemT = new Posicao(origem.linha, origem.coluna + 3);
-            //    Posicao destinoT = new Posicao(origem.linha, origem.coluna + 1);
-            //    Peca T = tab.retirarPeca(destinoT);
-            //    T.decrementarQtdMovimentos();
-            //    tab.colocarPeca(T, origemT);
-            //}
+            //# jogadaespecial roque pequeno
+            if (p is Rei && destino.coluna == origem.coluna + 2)
+            {
+                Posicao origemTorre = new Posicao(origem.linha, origem.coluna + 3);
+                Posicao destinoTorre = new Posicao(origem.linha, origem.coluna + 1);
+                Peca T = tab.retirarPeca(destinoTorre);
+                T.decrementarQtdMovimentos();
+                tab.colocarPeca(T, origemTorre);
+            }
 
-            //// #jogadaespecial roque grande
-            //if (p is Rei && destino.coluna == origem.coluna - 2)
-            //{
-            //    Posicao origemT = new Posicao(origem.linha, origem.coluna - 4);
-            //    Posicao destinoT = new Posicao(origem.linha, origem.coluna - 1);
-            //    Peca T = tab.retirarPeca(destinoT);
-            //    T.decrementarQtdMovimentos();
-            //    tab.colocarPeca(T, origemT);
-            //}
+            // #jogadaespecial roque grande
+            if (p is Rei && destino.coluna == origem.coluna - 2)
+            {
+                Posicao origemTorre = new Posicao(origem.linha, origem.coluna - 4);
+                Posicao destinoTorre = new Posicao(origem.linha, origem.coluna - 1);
+                Peca T = tab.retirarPeca(destinoTorre);
+                T.decrementarQtdMovimentos();
+                tab.colocarPeca(T, origemTorre);
+            }
 
             // #jogadaespecial en passant
             //if (p is Peao)
